@@ -10,6 +10,7 @@
     <name>finace-root</name>
     <modules>
         <module>finace-common</module>
+        <module>finace-mybatis</module>
     </modules>
     <!--注意打包方式-->
     <packaging>pom</packaging>
