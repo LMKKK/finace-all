@@ -12,6 +12,7 @@
         <module>finace-common</module>
         <module>finace-mybatis</module>
         <module>finace-wx</module>
+        <module>finace-biz</module>
     </modules>
     <!--注意打包方式-->
     <packaging>pom</packaging>
