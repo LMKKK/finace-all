@@ -29,7 +29,7 @@ import java.util.Set;
 @SuppressWarnings("NullableProblems")
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     /**
-     * 全局异常处理
+     * 自定义 全局异常处理
      * @return ResponseEntity<ApiResponse>
      */
     @ExceptionHandler(Exception.class)
@@ -44,8 +44,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * 业务处理异常
-     *
+     * 自定义 参数异常处理
      * @return ResponseEntity
      */
     @ExceptionHandler(ParameterException.class)
@@ -59,8 +58,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * 业务处理异常
-     *
+     * 自定义 业务处理异常
      * @return ResponseEntity<ApiResponse>
      */
     @ExceptionHandler(BizException.class)
@@ -75,7 +73,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * 业务处理异常(登录异常)
+     * 自定义 业务处理异常(登录异常)
      *
      * @return ResponseEntity<ApiResponse>
      */
