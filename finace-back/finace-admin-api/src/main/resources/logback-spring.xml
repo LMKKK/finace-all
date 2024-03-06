@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <!--彩色日志输出格式-->
+    <property name="CONSOLE_LOG_PATTERN" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%level){blue} %clr(${PID}){magenta} %clr([%thread]){orange} %clr(%logger){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <!--文件日志输出格式-->
+    <!--格式化输出：%d表示日期，%thread表示线程，%-5level：级别从左显示五个字符宽度，%logger{36}：logger是class的全名,后面的数字代表限制最长的字符，%msg：日志消息，%n换行符-->
+    <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+
+    <springProperty scope="context" name="LOG_FILE_NAME" source="logging.file.name"/>
+
+    <springProperty scope="context" name="APP_NAME" source="spring.application.mysass-finance-admin-api"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--日志文件输出格式-->
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <!-- 日志文件输出的文件名 -->
+        <file>${LOG_FILE_NAME}</file>
+        <!-- 日志记录器的基于大小和时间的滚动策略，按日期，按大小记录 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_FILE_NAME}-%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <!-- 每个文件最多10M -->
+            <maxFileSize>10MB</maxFileSize>
+            <!--日志文件保留天数-->
+            <maxHistory>60</maxHistory>
+            <!-- 最多保留20g的日志文件-->
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <file>${LOG_FILE_NAME}.error</file>
+        <!-- 日志记录器的基于时间的滚动策略，按日期记录 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PATH}/${LOG_FILE_NAME}.error-%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>1024</queueSize>
+        <neverBlock>true</neverBlock>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="FILE"/>
+    </appender>
+
+    <appender name="FILE_ERROR_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <neverBlock>true</neverBlock>
+        <appender-ref ref="FILE_ERROR"/>
+    </appender>
+
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- always a good idea to have an OnConsoleStatusListener -->
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+
+    <!-- 依赖包的日志级别定义 -->
+    <logger name="org.springframework">
+        <level value="warn"/>
+    </logger>
+
+    <logger name="org.springframework.security">
+        <level value="debug"/>
+    </logger>
+
+    <!-- 项目的日志级别定义 -->
+    <logger name="com.bage">
+        <level value="debug"/>
+    </logger>
+
+    <root level="info" additivity="false">
+        <appender-ref ref="FILE_ASYNC"/>
+        <appender-ref ref="FILE_ERROR_ASYNC"/>
+    </root>
+</included>

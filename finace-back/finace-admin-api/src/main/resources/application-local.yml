@@ -1,0 +1,14 @@
+# 数据源配置
+spring:
+  #  profiles:
+  #    active: local
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/bage-finance-local?useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+
+# 日志配置
+logging:
+  file:
+    name: ../${spring.application.name}/logs/bage-finance-admin-api.log

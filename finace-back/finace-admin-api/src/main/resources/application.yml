@@ -1,0 +1,99 @@
+# server
+server:
+  # port
+  port: 8091
+  #  servlet:
+  #    # context path
+  #    context-path: /mysass-finance-admin-api
+  tomcat:
+    # tomcat URI encode
+    uri-encoding: UTF-8
+
+# spring
+spring:
+  # 应用名称
+  application:
+    name: finance-admin-api
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # HikariCP连接池配置（springboot2.0默认连接池，效率最高，没有sql拦截，无需引入依赖信息）
+    hikari:
+      minimum-idle: 5   # 最小空闲连接数量
+      idle-timeout: 180000   #  空闲连接存活最大时间，默认600000（10分钟）
+      maximum-pool-size: 20 # 连接池最大连接数，默认是10
+      auto-commit: true # 控制从池返回的链接的默认自动提交行为，默认值：true
+      pool-name: Hikari # 连接池名称
+      max-lifetime: 1800000 # 控制池中链接的最长生命周期，值0表示无限生命周期，默认1800000，即30分钟
+      connection-timeout: 30000 # 数据库链接超时时间，默认30秒，即30000
+      connection-test-query: SELECT 1
+      # 多久检查一次连接的活性
+      # 检查时会先把连接从池中拿出来（空闲的话），然后调用isValid()或执行connectionTestQuery来校验活性，如果通过校验，则放回池里。
+      # 默认 0 （不启用），最小值为 30000 ms，必须小于 maxLifetime。支持 JMX 动态修改
+      keepalive-time: 30000
+
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    # upload file
+    multipart:
+      max-file-size: 50MB #单个上传文件的最大大小
+      max-request-size: 50MB #整个请求的大小不能超过 50 兆字节（MB）
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher #使用 Ant 风格的路径模式来配置 URL 路径匹配策略
+
+# Mybatis
+mybatis:
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  type-aliases-package: com.finace
+  configuration:
+    map-underscore-to-camel-case: true
+    default-statement-timeout: 15
+
+# Swagger
+swagger:
+  enable: true
+  name: BAGE-FINANCE-ADMIN-API
+  description: BAGE-FINANCE-ADMIN-API 接口文档
+  version: 0.0.1
+
+# Swagger UI
+knife4j:
+  enable: true
+  production: false
+  setting:
+    language: zh-CN
+    enableDynamicParameter: true
+
+# 日志配置
+logging:
+  config: classpath:logback-spring-${spring.profiles.active}.xml
+
+security:
+  # 开启安全校验
+  enable: true
+  getUserType: token
+  # 白名单
+  ignores:
+    # swagger
+    - /v3/api-docs
+    - /swagger-resources/configuration/ui
+    - /swagger-resources
+    - /swagger-resources/configuration/security
+    - /webjars/**
+    - /swagger-ui.html
+    - /doc.html
+    - /favicon.ico
+    - /login/*
+    - /reg/*
+    - /wxEvent/receiveMpEvent
+  expire: 36000
+sys:
+  #是否开启redisTemplate配置(默认关闭)
+  redis-template-config: true
+  #是否开启restTemplate配置(默认关闭)
+  rest-template-config: true
+  #是否开启json配置(默认关闭)
+  json-config: true
