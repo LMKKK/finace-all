@@ -13,6 +13,7 @@
         <module>finace-mybatis</module>
         <module>finace-wx</module>
         <module>finace-biz</module>
+        <module>finace-admin-api</module>
     </modules>
     <!--注意打包方式-->
     <packaging>pom</packaging>
