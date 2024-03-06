@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 # 日志文件
 *.log
+*.log.*
 **/logs/
 
 ### IntelliJ IDEA ###
