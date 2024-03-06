@@ -4,8 +4,10 @@ target/
 !**/src/test/**/target/
 # 日志文件
 *.log
+**/logs/
+
 ### IntelliJ IDEA ###
-.idea/**
+.idea/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
