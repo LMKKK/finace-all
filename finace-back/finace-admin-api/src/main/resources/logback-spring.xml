@@ -89,7 +89,7 @@
     </logger>
 
     <!-- 项目的日志级别定义 -->
-    <logger name="com.bage">
+    <logger name="com.finace">
         <level value="debug"/>
     </logger>
 

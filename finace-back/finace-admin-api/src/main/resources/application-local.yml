@@ -11,4 +11,4 @@ spring:
 # 日志配置
 logging:
   file:
-    name: ../${spring.application.name}/logs/bage-finance-admin-api.log
+    name: ../${spring.application.name}-logs/finance-admin-api.log

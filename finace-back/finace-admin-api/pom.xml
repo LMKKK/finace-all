@@ -60,7 +60,7 @@
     </dependencies>
 
     <build>
-        <finalName>bage-finance-admin-api</finalName>
+        <finalName>finance-admin-api</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
