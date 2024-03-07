@@ -5,7 +5,7 @@ public class RedisKeyConstant {
     public static final String GRAPHIC_VERIFICATION_CODE = "GRAPHIC_VERIFICATION_CODE:";
 
     /**
-     * 短信验证码
+     * 短信验证码 前缀
      */
     public static final String SMS_CODE = "SMS_CODE:";
 
