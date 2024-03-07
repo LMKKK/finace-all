@@ -233,7 +233,7 @@
             node_path        = #{nodePath,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <select id="list" parameterType="com.finace.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+    <select id="list" parameterType="com.finace.mybatis.helper.MyBatisWrapper" resultMap="BaseResultMap">
         <include refid="listSql"/>
     </select>
     <sql id="listSql">
@@ -304,7 +304,7 @@
             </trim>
         </where>
     </sql>
-    <select id="topOne" parameterType="com.finace.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+    <select id="topOne" parameterType="com.finace.mybatis.helper.MyBatisWrapper" resultMap="BaseResultMap">
         select
         <if test="selectBuilder != null">
             <trim prefixOverrides="," suffixOverrides=",">
@@ -321,7 +321,7 @@
         limit 1
     </select>
 
-    <select id="count" parameterType="com.finace.mybatis.help.MyBatisWrapper" resultType="java.lang.Integer">
+    <select id="count" parameterType="com.finace.mybatis.helper.MyBatisWrapper" resultType="java.lang.Integer">
         <include refid="countSql"/>
     </select>
     <sql id="countSql">
@@ -330,7 +330,7 @@
             <include refid="Example_Where_Clause"/>
         </if>
     </sql>
-    <update id="updateField" parameterType="com.finace.mybatis.help.MyBatisWrapper">
+    <update id="updateField" parameterType="com.finace.mybatis.helper.MyBatisWrapper">
         update sys_menu
         set
         <trim prefixOverrides="," suffixOverrides=",">
@@ -391,7 +391,7 @@
             </if>
         </foreach>
     </update>
-    <select id="get" parameterType="com.finace.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+    <select id="get" parameterType="com.finace.mybatis.helper.MyBatisWrapper" resultMap="BaseResultMap">
         select
         <if test="selectBuilder != null">
             <trim prefixOverrides="," suffixOverrides=",">
