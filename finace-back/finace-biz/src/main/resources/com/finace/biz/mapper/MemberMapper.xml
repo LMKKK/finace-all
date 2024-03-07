@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finace.biz.mapper.MemberMapper">
+    <resultMap id="BaseResultMap" type="com.finace.biz.domain.Member">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="disable" jdbcType="BIT" property="disable"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="tenant_id" jdbcType="BIGINT" property="tenantId"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.finace.biz.domain.Member">
+        <result column="sys_role_ids" jdbcType="LONGVARCHAR" property="sysRoleIds"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , nick_name, disable, create_time, update_time, name, avatar_url, tenant_id, email
+    </sql>
+    <sql id="Blob_Column_List">
+        sys_role_ids
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from member
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from member
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.finace.biz.domain.Member">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into member (nick_name, disable, create_time,
+        update_time, name, avatar_url,
+        tenant_id, email, sys_role_ids
+        )
+        values (#{nickName,jdbcType=VARCHAR}, #{disable,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR},
+        #{tenantId,jdbcType=BIGINT}, #{email,jdbcType=VARCHAR}, #{sysRoleIds,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.finace.biz.domain.Member">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nickName != null">
+                nick_name,
+            </if>
+            <if test="disable != null">
+                disable,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="avatarUrl != null">
+                avatar_url,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="sysRoleIds != null">
+                sys_role_ids,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="disable != null">
+                #{disable,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="avatarUrl != null">
+                #{avatarUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId,jdbcType=BIGINT},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="sysRoleIds != null">
+                #{sysRoleIds,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.finace.biz.domain.Member">
+        update member
+        <set>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="disable != null">
+                disable = #{disable,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="avatarUrl != null">
+                avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId,jdbcType=BIGINT},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="sysRoleIds != null">
+                sys_role_ids = #{sysRoleIds,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.finace.biz.domain.Member">
+        update member
+        set nick_name    = #{nickName,jdbcType=VARCHAR},
+            disable      = #{disable,jdbcType=BIT},
+            create_time  = #{createTime,jdbcType=TIMESTAMP},
+            update_time  = #{updateTime,jdbcType=TIMESTAMP},
+            name         = #{name,jdbcType=VARCHAR},
+            avatar_url   = #{avatarUrl,jdbcType=VARCHAR},
+            tenant_id    = #{tenantId,jdbcType=BIGINT},
+            email        = #{email,jdbcType=VARCHAR},
+            sys_role_ids = #{sysRoleIds,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.finace.biz.domain.Member">
+        update member
+        set nick_name   = #{nickName,jdbcType=VARCHAR},
+            disable     = #{disable,jdbcType=BIT},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            name        = #{name,jdbcType=VARCHAR},
+            avatar_url  = #{avatarUrl,jdbcType=VARCHAR},
+            tenant_id   = #{tenantId,jdbcType=BIGINT},
+            email       = #{email,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="list" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+        <include refid="listSql"/>
+    </select>
+    <sql id="listSql">
+        select
+        <if test="selectBuilder == null">
+            *
+        </if>
+        <if test="selectBuilder != null">
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${selectBuilder}
+            </trim>
+        </if>
+        from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="groupBySql != null">
+            group by ${groupBySql}
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="rows != null">
+            <if test="offset != null">
+                limit ${offset}, ${rows}
+            </if>
+            <if test="offset == null">
+                limit ${rows}
+            </if>
+        </if>
+    </sql>
+    <sql id="Example_Where_Clause">
+        <where>
+            <trim prefixOverrides="and | or">
+                <foreach collection="oredCriteria" item="criteria">
+                    <if test="criteria.valid">
+                        <if test="criteria.andOrOr">
+                            and
+                        </if>
+                        <if test="!criteria.andOrOr">
+                            or
+                        </if>
+                        <trim prefix="(" prefixOverrides="and | or" suffix=")">
+                            <foreach collection="criteria.criteria" item="criterion">
+                                <choose>
+                                    <when test="criterion.noValue">
+                                        ${criterion.condition}
+                                    </when>
+                                    <when test="criterion.singleValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.betweenValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}} and
+                                        #{criterion.secondValue, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.listValue">
+                                        ${criterion.condition}
+                                        <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                                 separator=",">
+                                            #{listItem, jdbcType=${criterion.jdbcType}}
+                                        </foreach>
+                                    </when>
+                                </choose>
+                            </foreach>
+                        </trim>
+                    </if>
+                </foreach>
+            </trim>
+        </where>
+    </sql>
+    <select id="topOne" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+        select
+        <if test="selectBuilder != null">
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${selectBuilder}
+            </trim>
+        </if>
+        from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        limit 1
+    </select>
+
+    <select id="count" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultType="java.lang.Integer">
+        <include refid="countSql"/>
+    </select>
+    <sql id="countSql">
+        select count(*) total_count from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </sql>
+    <update id="updateField" parameterType="com.bage.mybatis.help.MyBatisWrapper">
+        update member
+        set
+        <trim prefixOverrides="," suffixOverrides=",">
+            ${example.updateSql}
+        </trim>
+        <if test="example.updateSql != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <trim prefixOverrides="and | or">
+                <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                    <if test="criteria.andOrOr">
+                        and
+                    </if>
+                    <if test="!criteria.andOrOr">
+                        or
+                    </if>
+                    <if test="criteria.valid">
+                        <trim prefix="(" prefixOverrides="and" suffix=")">
+                            <foreach collection="criteria.criteria" item="criterion">
+                                <choose>
+                                    <when test="criterion.noValue">
+                                        ${criterion.condition}
+                                    </when>
+                                    <when test="criterion.singleValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.betweenValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}} and
+                                        #{criterion.secondValue, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.listValue">
+                                        ${criterion.condition}
+                                        <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                                 separator=",">
+                                            #{listItem, jdbcType=${criterion.jdbcType}}
+                                        </foreach>
+                                    </when>
+                                </choose>
+                            </foreach>
+                        </trim>
+                    </if>
+                </foreach>
+            </trim>
+        </where>
+    </sql>
+    <update id="updateFieldBatch" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="example" separator=";">
+            update member
+            set
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${example.updateSql}
+            </trim>
+            <if test="example != null">
+                <include refid="Update_By_Example_Where_Clause"/>
+            </if>
+        </foreach>
+    </update>
+    <select id="get" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+        select
+        <if test="selectBuilder != null">
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${selectBuilder}
+            </trim>
+        </if>
+        from member
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        update member
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.id != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.id,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="nick_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.nickName != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.nickName,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="disable = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.disable != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.disable,jdbcType=BIT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="create_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createTime != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateTime != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.name != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="avatar_url = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.avatarUrl != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.avatarUrl,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="tenant_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.tenantId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.tenantId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="email = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.email != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.email,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="sys_role_ids = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.sysRoleIds != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.sysRoleIds,jdbcType=LONGVARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+
+    <insert id="insertBatch" keyColumn="id" parameterType="java.util.List">
+        insert into member (nick_name, disable, create_time, update_time, name, avatar_url, tenant_id, email,
+        sys_role_ids) values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.nickName, jdbcType=VARCHAR},
+                #{item.disable, jdbcType=BIT},
+                #{item.createTime, jdbcType=TIMESTAMP},
+                #{item.updateTime, jdbcType=TIMESTAMP},
+                #{item.name, jdbcType=VARCHAR},
+                #{item.avatarUrl, jdbcType=VARCHAR},
+                #{item.tenantId, jdbcType=BIGINT},
+                #{item.email, jdbcType=VARCHAR},
+                #{item.sysRoleIds, jdbcType=LONGVARCHAR},
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="insertBatchSelective" keyColumn="id" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into member
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="item.nickName != null">
+                    nick_name,
+                </if>
+                <if test="item.disable != null">
+                    disable,
+                </if>
+                <if test="item.createTime != null">
+                    create_time,
+                </if>
+                <if test="item.updateTime != null">
+                    update_time,
+                </if>
+                <if test="item.name != null">
+                    name,
+                </if>
+                <if test="item.avatarUrl != null">
+                    avatar_url,
+                </if>
+                <if test="item.tenantId != null">
+                    tenant_id,
+                </if>
+                <if test="item.email != null">
+                    email,
+                </if>
+                <if test="item.sysRoleIds != null">
+                    sys_role_ids,
+                </if>
+            </trim>
+            values
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="item.nickName != null">
+                    #{item.nickName, jdbcType=VARCHAR},
+                </if>
+                <if test="item.disable != null">
+                    #{item.disable, jdbcType=BIT},
+                </if>
+                <if test="item.createTime != null">
+                    #{item.createTime, jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.updateTime != null">
+                    #{item.updateTime, jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.name != null">
+                    #{item.name, jdbcType=VARCHAR},
+                </if>
+                <if test="item.avatarUrl != null">
+                    #{item.avatarUrl, jdbcType=VARCHAR},
+                </if>
+                <if test="item.tenantId != null">
+                    #{item.tenantId, jdbcType=BIGINT},
+                </if>
+                <if test="item.email != null">
+                    #{item.email, jdbcType=VARCHAR},
+                </if>
+                <if test="item.sysRoleIds != null">
+                    #{item.sysRoleIds, jdbcType=LONGVARCHAR},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+</mapper>

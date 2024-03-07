@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finace.biz.mapper.SysRoleBindMenuMapper">
+    <resultMap id="BaseResultMap" type="com.finace.biz.domain.SysRoleBindMenu">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sys_role_id" jdbcType="INTEGER" property="sysRoleId"/>
+        <result column="sys_menu_id" jdbcType="INTEGER" property="sysMenuId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="member_id" jdbcType="BIGINT" property="memberId"/>
+        <result column="update_member_id" jdbcType="BIGINT" property="updateMemberId"/>
+        <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+        <result column="disable" jdbcType="BIT" property="disable"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , sys_role_id, sys_menu_id, create_time, update_time, member_id, update_member_id,
+    del_flag, disable
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role_bind_menu
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from sys_role_bind_menu
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.finace.biz.domain.SysRoleBindMenu">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sys_role_bind_menu (sys_role_id, sys_menu_id, create_time,
+        update_time, member_id, update_member_id,
+        del_flag, disable)
+        values (#{sysRoleId,jdbcType=INTEGER}, #{sysMenuId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}, #{memberId,jdbcType=BIGINT}, #{updateMemberId,jdbcType=BIGINT},
+        #{delFlag,jdbcType=BIT}, #{disable,jdbcType=BIT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.finace.biz.domain.SysRoleBindMenu">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sys_role_bind_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysRoleId != null">
+                sys_role_id,
+            </if>
+            <if test="sysMenuId != null">
+                sys_menu_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="updateMemberId != null">
+                update_member_id,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="disable != null">
+                disable,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sysRoleId != null">
+                #{sysRoleId,jdbcType=INTEGER},
+            </if>
+            <if test="sysMenuId != null">
+                #{sysMenuId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=BIGINT},
+            </if>
+            <if test="updateMemberId != null">
+                #{updateMemberId,jdbcType=BIGINT},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=BIT},
+            </if>
+            <if test="disable != null">
+                #{disable,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.finace.biz.domain.SysRoleBindMenu">
+        update sys_role_bind_menu
+        <set>
+            <if test="sysRoleId != null">
+                sys_role_id = #{sysRoleId,jdbcType=INTEGER},
+            </if>
+            <if test="sysMenuId != null">
+                sys_menu_id = #{sysMenuId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId,jdbcType=BIGINT},
+            </if>
+            <if test="updateMemberId != null">
+                update_member_id = #{updateMemberId,jdbcType=BIGINT},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=BIT},
+            </if>
+            <if test="disable != null">
+                disable = #{disable,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.finace.biz.domain.SysRoleBindMenu">
+        update sys_role_bind_menu
+        set sys_role_id      = #{sysRoleId,jdbcType=INTEGER},
+            sys_menu_id      = #{sysMenuId,jdbcType=INTEGER},
+            create_time      = #{createTime,jdbcType=TIMESTAMP},
+            update_time      = #{updateTime,jdbcType=TIMESTAMP},
+            member_id        = #{memberId,jdbcType=BIGINT},
+            update_member_id = #{updateMemberId,jdbcType=BIGINT},
+            del_flag         = #{delFlag,jdbcType=BIT},
+            disable          = #{disable,jdbcType=BIT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="list" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+        <include refid="listSql"/>
+    </select>
+    <sql id="listSql">
+        select
+        <if test="selectBuilder == null">
+            *
+        </if>
+        <if test="selectBuilder != null">
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${selectBuilder}
+            </trim>
+        </if>
+        from sys_role_bind_menu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="groupBySql != null">
+            group by ${groupBySql}
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="rows != null">
+            <if test="offset != null">
+                limit ${offset}, ${rows}
+            </if>
+            <if test="offset == null">
+                limit ${rows}
+            </if>
+        </if>
+    </sql>
+    <sql id="Example_Where_Clause">
+        <where>
+            <trim prefixOverrides="and | or">
+                <foreach collection="oredCriteria" item="criteria">
+                    <if test="criteria.valid">
+                        <if test="criteria.andOrOr">
+                            and
+                        </if>
+                        <if test="!criteria.andOrOr">
+                            or
+                        </if>
+                        <trim prefix="(" prefixOverrides="and | or" suffix=")">
+                            <foreach collection="criteria.criteria" item="criterion">
+                                <choose>
+                                    <when test="criterion.noValue">
+                                        ${criterion.condition}
+                                    </when>
+                                    <when test="criterion.singleValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.betweenValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}} and
+                                        #{criterion.secondValue, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.listValue">
+                                        ${criterion.condition}
+                                        <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                                 separator=",">
+                                            #{listItem, jdbcType=${criterion.jdbcType}}
+                                        </foreach>
+                                    </when>
+                                </choose>
+                            </foreach>
+                        </trim>
+                    </if>
+                </foreach>
+            </trim>
+        </where>
+    </sql>
+    <select id="topOne" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+        select
+        <if test="selectBuilder != null">
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${selectBuilder}
+            </trim>
+        </if>
+        from sys_role_bind_menu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        limit 1
+    </select>
+
+    <select id="count" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultType="java.lang.Integer">
+        <include refid="countSql"/>
+    </select>
+    <sql id="countSql">
+        select count(*) total_count from sys_role_bind_menu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </sql>
+    <update id="updateField" parameterType="com.bage.mybatis.help.MyBatisWrapper">
+        update sys_role_bind_menu
+        set
+        <trim prefixOverrides="," suffixOverrides=",">
+            ${example.updateSql}
+        </trim>
+        <if test="example.updateSql != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <trim prefixOverrides="and | or">
+                <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                    <if test="criteria.andOrOr">
+                        and
+                    </if>
+                    <if test="!criteria.andOrOr">
+                        or
+                    </if>
+                    <if test="criteria.valid">
+                        <trim prefix="(" prefixOverrides="and" suffix=")">
+                            <foreach collection="criteria.criteria" item="criterion">
+                                <choose>
+                                    <when test="criterion.noValue">
+                                        ${criterion.condition}
+                                    </when>
+                                    <when test="criterion.singleValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.betweenValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}} and
+                                        #{criterion.secondValue, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.listValue">
+                                        ${criterion.condition}
+                                        <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                                 separator=",">
+                                            #{listItem, jdbcType=${criterion.jdbcType}}
+                                        </foreach>
+                                    </when>
+                                </choose>
+                            </foreach>
+                        </trim>
+                    </if>
+                </foreach>
+            </trim>
+        </where>
+    </sql>
+    <update id="updateFieldBatch" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="example" separator=";">
+            update sys_role_bind_menu
+            set
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${example.updateSql}
+            </trim>
+            <if test="example != null">
+                <include refid="Update_By_Example_Where_Clause"/>
+            </if>
+        </foreach>
+    </update>
+    <select id="get" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+        select
+        <if test="selectBuilder != null">
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${selectBuilder}
+            </trim>
+        </if>
+        from sys_role_bind_menu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        update sys_role_bind_menu
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.id != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.id,jdbcType=INTEGER}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="sys_role_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.sysRoleId != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.sysRoleId,jdbcType=INTEGER}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="sys_menu_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.sysMenuId != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.sysMenuId,jdbcType=INTEGER}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="create_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createTime != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateTime != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="member_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.memberId != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.memberId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="update_member_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateMemberId != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.updateMemberId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="del_flag = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.delFlag != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.delFlag,jdbcType=BIT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="disable = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.disable != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.disable,jdbcType=BIT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+
+    <insert id="insertBatch" keyColumn="id" parameterType="java.util.List">
+        insert into sys_role_bind_menu (sys_role_id, sys_menu_id, create_time, update_time, member_id, update_member_id,
+        del_flag, disable) values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.sysRoleId, jdbcType=INTEGER},
+                #{item.sysMenuId, jdbcType=INTEGER},
+                #{item.createTime, jdbcType=TIMESTAMP},
+                #{item.updateTime, jdbcType=TIMESTAMP},
+                #{item.memberId, jdbcType=BIGINT},
+                #{item.updateMemberId, jdbcType=BIGINT},
+                #{item.delFlag, jdbcType=BIT},
+                #{item.disable, jdbcType=BIT},
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="insertBatchSelective" keyColumn="id" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into sys_role_bind_menu
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="item.sysRoleId != null">
+                    sys_role_id,
+                </if>
+                <if test="item.sysMenuId != null">
+                    sys_menu_id,
+                </if>
+                <if test="item.createTime != null">
+                    create_time,
+                </if>
+                <if test="item.updateTime != null">
+                    update_time,
+                </if>
+                <if test="item.memberId != null">
+                    member_id,
+                </if>
+                <if test="item.updateMemberId != null">
+                    update_member_id,
+                </if>
+                <if test="item.delFlag != null">
+                    del_flag,
+                </if>
+                <if test="item.disable != null">
+                    disable,
+                </if>
+            </trim>
+            values
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="item.sysRoleId != null">
+                    #{item.sysRoleId, jdbcType=INTEGER},
+                </if>
+                <if test="item.sysMenuId != null">
+                    #{item.sysMenuId, jdbcType=INTEGER},
+                </if>
+                <if test="item.createTime != null">
+                    #{item.createTime, jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.updateTime != null">
+                    #{item.updateTime, jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.memberId != null">
+                    #{item.memberId, jdbcType=BIGINT},
+                </if>
+                <if test="item.updateMemberId != null">
+                    #{item.updateMemberId, jdbcType=BIGINT},
+                </if>
+                <if test="item.delFlag != null">
+                    #{item.delFlag, jdbcType=BIT},
+                </if>
+                <if test="item.disable != null">
+                    #{item.disable, jdbcType=BIT},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+</mapper>

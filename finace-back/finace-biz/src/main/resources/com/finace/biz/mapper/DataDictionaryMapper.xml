@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finace.biz.mapper.DataDictionaryMapper">
+    <resultMap id="BaseResultMap" type="com.finace.biz.domain.DataDictionary">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="data_code_cate" jdbcType="VARCHAR" property="dataCodeCate"/>
+        <result column="data_code" jdbcType="VARCHAR" property="dataCode"/>
+        <result column="data_value" jdbcType="VARCHAR" property="dataValue"/>
+        <result column="data_sort" jdbcType="INTEGER" property="dataSort"/>
+        <result column="disable" jdbcType="BIT" property="disable"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , data_code_cate, data_code, data_value, data_sort, disable, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from data_dictionary
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from data_dictionary
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.finace.biz.domain.DataDictionary">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into data_dictionary (data_code_cate, data_code, data_value,
+        data_sort, disable, create_time,
+        update_time)
+        values (#{dataCodeCate,jdbcType=VARCHAR}, #{dataCode,jdbcType=VARCHAR}, #{dataValue,jdbcType=VARCHAR},
+        #{dataSort,jdbcType=INTEGER}, #{disable,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.finace.biz.domain.DataDictionary">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into data_dictionary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dataCodeCate != null">
+                data_code_cate,
+            </if>
+            <if test="dataCode != null">
+                data_code,
+            </if>
+            <if test="dataValue != null">
+                data_value,
+            </if>
+            <if test="dataSort != null">
+                data_sort,
+            </if>
+            <if test="disable != null">
+                disable,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dataCodeCate != null">
+                #{dataCodeCate,jdbcType=VARCHAR},
+            </if>
+            <if test="dataCode != null">
+                #{dataCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dataValue != null">
+                #{dataValue,jdbcType=VARCHAR},
+            </if>
+            <if test="dataSort != null">
+                #{dataSort,jdbcType=INTEGER},
+            </if>
+            <if test="disable != null">
+                #{disable,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.finace.biz.domain.DataDictionary">
+        update data_dictionary
+        <set>
+            <if test="dataCodeCate != null">
+                data_code_cate = #{dataCodeCate,jdbcType=VARCHAR},
+            </if>
+            <if test="dataCode != null">
+                data_code = #{dataCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dataValue != null">
+                data_value = #{dataValue,jdbcType=VARCHAR},
+            </if>
+            <if test="dataSort != null">
+                data_sort = #{dataSort,jdbcType=INTEGER},
+            </if>
+            <if test="disable != null">
+                disable = #{disable,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.finace.biz.domain.DataDictionary">
+        update data_dictionary
+        set data_code_cate = #{dataCodeCate,jdbcType=VARCHAR},
+            data_code      = #{dataCode,jdbcType=VARCHAR},
+            data_value     = #{dataValue,jdbcType=VARCHAR},
+            data_sort      = #{dataSort,jdbcType=INTEGER},
+            disable        = #{disable,jdbcType=BIT},
+            create_time    = #{createTime,jdbcType=TIMESTAMP},
+            update_time    = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="list" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+        <include refid="listSql"/>
+    </select>
+    <sql id="listSql">
+        select
+        <if test="selectBuilder == null">
+            *
+        </if>
+        <if test="selectBuilder != null">
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${selectBuilder}
+            </trim>
+        </if>
+        from data_dictionary
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="groupBySql != null">
+            group by ${groupBySql}
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="rows != null">
+            <if test="offset != null">
+                limit ${offset}, ${rows}
+            </if>
+            <if test="offset == null">
+                limit ${rows}
+            </if>
+        </if>
+    </sql>
+    <sql id="Example_Where_Clause">
+        <where>
+            <trim prefixOverrides="and | or">
+                <foreach collection="oredCriteria" item="criteria">
+                    <if test="criteria.valid">
+                        <if test="criteria.andOrOr">
+                            and
+                        </if>
+                        <if test="!criteria.andOrOr">
+                            or
+                        </if>
+                        <trim prefix="(" prefixOverrides="and | or" suffix=")">
+                            <foreach collection="criteria.criteria" item="criterion">
+                                <choose>
+                                    <when test="criterion.noValue">
+                                        ${criterion.condition}
+                                    </when>
+                                    <when test="criterion.singleValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.betweenValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}} and
+                                        #{criterion.secondValue, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.listValue">
+                                        ${criterion.condition}
+                                        <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                                 separator=",">
+                                            #{listItem, jdbcType=${criterion.jdbcType}}
+                                        </foreach>
+                                    </when>
+                                </choose>
+                            </foreach>
+                        </trim>
+                    </if>
+                </foreach>
+            </trim>
+        </where>
+    </sql>
+    <select id="topOne" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+        select
+        <if test="selectBuilder != null">
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${selectBuilder}
+            </trim>
+        </if>
+        from data_dictionary
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        limit 1
+    </select>
+
+    <select id="count" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultType="java.lang.Integer">
+        <include refid="countSql"/>
+    </select>
+    <sql id="countSql">
+        select count(*) total_count from data_dictionary
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </sql>
+    <update id="updateField" parameterType="com.bage.mybatis.help.MyBatisWrapper">
+        update data_dictionary
+        set
+        <trim prefixOverrides="," suffixOverrides=",">
+            ${example.updateSql}
+        </trim>
+        <if test="example.updateSql != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <trim prefixOverrides="and | or">
+                <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                    <if test="criteria.andOrOr">
+                        and
+                    </if>
+                    <if test="!criteria.andOrOr">
+                        or
+                    </if>
+                    <if test="criteria.valid">
+                        <trim prefix="(" prefixOverrides="and" suffix=")">
+                            <foreach collection="criteria.criteria" item="criterion">
+                                <choose>
+                                    <when test="criterion.noValue">
+                                        ${criterion.condition}
+                                    </when>
+                                    <when test="criterion.singleValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.betweenValue">
+                                        ${criterion.condition} #{criterion.value, jdbcType=${criterion.jdbcType}} and
+                                        #{criterion.secondValue, jdbcType=${criterion.jdbcType}}
+                                    </when>
+                                    <when test="criterion.listValue">
+                                        ${criterion.condition}
+                                        <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                                 separator=",">
+                                            #{listItem, jdbcType=${criterion.jdbcType}}
+                                        </foreach>
+                                    </when>
+                                </choose>
+                            </foreach>
+                        </trim>
+                    </if>
+                </foreach>
+            </trim>
+        </where>
+    </sql>
+    <update id="updateFieldBatch" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="example" separator=";">
+            update data_dictionary
+            set
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${example.updateSql}
+            </trim>
+            <if test="example != null">
+                <include refid="Update_By_Example_Where_Clause"/>
+            </if>
+        </foreach>
+    </update>
+    <select id="get" parameterType="com.bage.mybatis.help.MyBatisWrapper" resultMap="BaseResultMap">
+        select
+        <if test="selectBuilder != null">
+            <trim prefixOverrides="," suffixOverrides=",">
+                ${selectBuilder}
+            </trim>
+        </if>
+        from data_dictionary
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        update data_dictionary
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.id != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.id,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="data_code_cate = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.dataCodeCate != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.dataCodeCate,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="data_code = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.dataCode != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.dataCode,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="data_value = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.dataValue != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.dataValue,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="data_sort = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.dataSort != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.dataSort,jdbcType=INTEGER}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="disable = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.disable != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.disable,jdbcType=BIT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="create_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createTime != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateTime != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+
+    <insert id="insertBatch" keyColumn="id" parameterType="java.util.List">
+        insert into data_dictionary (data_code_cate, data_code, data_value, data_sort, disable, create_time,
+        update_time) values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.dataCodeCate, jdbcType=VARCHAR},
+                #{item.dataCode, jdbcType=VARCHAR},
+                #{item.dataValue, jdbcType=VARCHAR},
+                #{item.dataSort, jdbcType=INTEGER},
+                #{item.disable, jdbcType=BIT},
+                #{item.createTime, jdbcType=TIMESTAMP},
+                #{item.updateTime, jdbcType=TIMESTAMP},
+            </trim>
+        </foreach>
+    </insert>
+    <insert id="insertBatchSelective" keyColumn="id" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into data_dictionary
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="item.dataCodeCate != null">
+                    data_code_cate,
+                </if>
+                <if test="item.dataCode != null">
+                    data_code,
+                </if>
+                <if test="item.dataValue != null">
+                    data_value,
+                </if>
+                <if test="item.dataSort != null">
+                    data_sort,
+                </if>
+                <if test="item.disable != null">
+                    disable,
+                </if>
+                <if test="item.createTime != null">
+                    create_time,
+                </if>
+                <if test="item.updateTime != null">
+                    update_time,
+                </if>
+            </trim>
+            values
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="item.dataCodeCate != null">
+                    #{item.dataCodeCate, jdbcType=VARCHAR},
+                </if>
+                <if test="item.dataCode != null">
+                    #{item.dataCode, jdbcType=VARCHAR},
+                </if>
+                <if test="item.dataValue != null">
+                    #{item.dataValue, jdbcType=VARCHAR},
+                </if>
+                <if test="item.dataSort != null">
+                    #{item.dataSort, jdbcType=INTEGER},
+                </if>
+                <if test="item.disable != null">
+                    #{item.disable, jdbcType=BIT},
+                </if>
+                <if test="item.createTime != null">
+                    #{item.createTime, jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.updateTime != null">
+                    #{item.updateTime, jdbcType=TIMESTAMP},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+</mapper>

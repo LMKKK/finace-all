@@ -51,12 +51,12 @@
         </jdbcConnection>
 
         <javaModelGenerator
-                targetPackage="com.finance.biz.domain"
+                targetPackage="com.finace.biz.domain"
                 targetProject="F:\Spring\finace-all\finace-back\finace-biz\src\main\java"
         />
 
         <!--自动生成的*Mapper.xml文件存放路径 (src/main/resources/文件夹一定要提前建好，否则不生成文件) -->
-        <sqlMapGenerator targetPackage="com.finance.biz.mapper"
+        <sqlMapGenerator targetPackage="com.finace.biz.mapper"
                          targetProject="F:\Spring\finace-all\finace-back\finace-biz\src\main\resources">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
@@ -64,7 +64,7 @@
         <!--mapper接口生成位置 -->
         <javaClientGenerator
                 type="XMLMAPPER"
-                targetPackage="com.finance.biz.mapper"
+                targetPackage="com.finace.biz.mapper"
                 targetProject="F:\Spring\finace-all\finace-back\finace-biz\src\main\java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
