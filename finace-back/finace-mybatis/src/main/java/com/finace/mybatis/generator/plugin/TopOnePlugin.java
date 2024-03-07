@@ -26,7 +26,7 @@ public class TopOnePlugin extends PluginAdapter {
     }
 
     private TextElement replaceCondition(String tableName) {
-        String selectNode = "  <select id=\"topOne\" parameterType=\"com.bage.mybatis.help.MyBatisWrapper\" resultMap=\"BaseResultMap\">\n" +
+        String selectNode = "  <select id=\"topOne\" parameterType=\"com.finace.mybatis.helper.MyBatisWrapper\" resultMap=\"BaseResultMap\">\n" +
                 "    select\n" +
                 "    <if test=\"selectBuilder != null\">\n" +
                 "      <trim prefixOverrides=\",\" suffixOverrides=\",\">\n" +

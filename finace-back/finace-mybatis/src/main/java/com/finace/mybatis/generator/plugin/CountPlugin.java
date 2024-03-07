@@ -26,7 +26,7 @@ public class CountPlugin extends PluginAdapter {
     }
 
     private TextElement replaceCondition(String tableName) {
-        String node = "<select id=\"count\" parameterType=\"com.bage.mybatis.help.MyBatisWrapper\" resultType=\"java.lang.Integer\">\n" +
+        String node = "<select id=\"count\" parameterType=\"com.finace.mybatis.helper.MyBatisWrapper\" resultType=\"java.lang.Integer\">\n" +
                 "        <include refid=\"countSql\"/>\n" +
                 "    </select>\n" +
                 "    <sql id=\"countSql\">\n" +

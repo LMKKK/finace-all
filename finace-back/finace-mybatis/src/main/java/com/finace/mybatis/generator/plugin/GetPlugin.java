@@ -26,7 +26,7 @@ public class GetPlugin extends PluginAdapter {
     }
 
     private TextElement replaceCondition(String tableName) {
-        String selectNode = "  <select id=\"get\" parameterType=\"com.bage.mybatis.help.MyBatisWrapper\" resultMap=\"BaseResultMap\">\n" +
+        String selectNode = "  <select id=\"get\" parameterType=\"com.finace.mybatis.helper.MyBatisWrapper\" resultMap=\"BaseResultMap\">\n" +
                 "    select\n" +
                 "    <if test=\"selectBuilder != null\">\n" +
                 "      <trim prefixOverrides=\",\" suffixOverrides=\",\">\n" +

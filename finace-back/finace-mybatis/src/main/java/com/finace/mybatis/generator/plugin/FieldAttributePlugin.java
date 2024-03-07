@@ -29,8 +29,8 @@ public class FieldAttributePlugin extends PluginAdapter {
         TopLevelClass root = new TopLevelClass(join(model, queryVoName + querVoSuffix));
 //        root.addImportedType(model + "." + queryVoName);
         root.setVisibility(JavaVisibility.PUBLIC);
-        root.addImportedType("com.bage.mybatis.help.DbField");
-        root.addImportedType("com.bage.mybatis.help.FieldResult");
+        root.addImportedType("com.finace.mybatis.helper.DbField");
+        root.addImportedType("com.finace.mybatis.helper.FieldResult");
         root.addImportedType("java.util.Collections");
 
         List<IntrospectedColumn> allColumns = introspectedTable.getAllColumns();
@@ -39,7 +39,7 @@ public class FieldAttributePlugin extends PluginAdapter {
             String attrName = JavaBeansUtil.getCamelCaseString(column.getActualColumnName(), false);
             //生成字段
             Field field = new Field(varName,
-                    new FullyQualifiedJavaType("com.bage.mybatis.help.DbField"));
+                    new FullyQualifiedJavaType("com.finace.mybatis.helper.DbField"));
             field.setVisibility(JavaVisibility.PUBLIC);
             field.setStatic(true);
             field.setInitializationString(String.format("new DbField(\"%s\",\"%s\",\"%s\",\"%s\")", column.getActualColumnName(), attrName, column.getJdbcTypeName(), column.getFullyQualifiedJavaType()));
@@ -49,7 +49,7 @@ public class FieldAttributePlugin extends PluginAdapter {
             setMethod.setVisibility(JavaVisibility.PUBLIC);
             setMethod.setStatic(true);
             setMethod.addParameter(new Parameter(column.getFullyQualifiedJavaType(), attrName));
-            setMethod.setReturnType(new FullyQualifiedJavaType("com.bage.mybatis.help.FieldResult"));
+            setMethod.setReturnType(new FullyQualifiedJavaType("com.finace.mybatis.helper.FieldResult"));
             setMethod.addBodyLine("return new FieldResult(" + field.getName() + ", Collections.singletonList(" + attrName + "));");
             root.addMethod(setMethod);
         }

@@ -26,7 +26,7 @@ public class ListPlugin extends PluginAdapter {
     }
 
     private TextElement replaceCondition(String tableName) {
-        String t = "<select id=\"list\" parameterType=\"com.bage.mybatis.help.MyBatisWrapper\" resultMap=\"BaseResultMap\">\n" +
+        String t = "<select id=\"list\" parameterType=\"com.finace.mybatis.helper.MyBatisWrapper\" resultMap=\"BaseResultMap\">\n" +
                 "        <include refid=\"listSql\"/>\n" +
                 "    </select>\n" +
                 "    <sql id=\"listSql\">\n" +

@@ -26,7 +26,7 @@ public class UpdateFieldPlugin extends PluginAdapter {
     }
 
     private TextElement replaceCondition(String tableName) {
-        String node = "<update id=\"updateField\" parameterType=\"com.bage.mybatis.help.MyBatisWrapper\">\n" +
+        String node = "<update id=\"updateField\" parameterType=\"com.finace.mybatis.helper.MyBatisWrapper\">\n" +
                 "    update " + tableName + " \n" +
                 "    set \n" +
                 "    <trim prefixOverrides=\",\" suffixOverrides=\",\">\n" +
