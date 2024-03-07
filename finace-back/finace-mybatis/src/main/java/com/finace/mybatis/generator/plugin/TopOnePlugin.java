@@ -8,6 +8,9 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 
 import java.util.List;
 
+/**
+ * 查询单条记录插件，如果返回多条则指查询1条
+ */
 public class TopOnePlugin extends PluginAdapter {
 
     @Override

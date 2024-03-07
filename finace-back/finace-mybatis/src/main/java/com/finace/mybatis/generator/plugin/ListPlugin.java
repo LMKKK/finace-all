@@ -8,6 +8,9 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 
 import java.util.List;
 
+/**
+ * 查询集合插件
+ */
 public class ListPlugin extends PluginAdapter {
 
     @Override

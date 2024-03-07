@@ -9,6 +9,9 @@ import org.mybatis.generator.api.dom.java.Method;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * 拓展官方生成mapper的插件
+ */
 public class MapperPlugin extends PluginAdapter {
     @Override
     public boolean validate(List<String> list) {

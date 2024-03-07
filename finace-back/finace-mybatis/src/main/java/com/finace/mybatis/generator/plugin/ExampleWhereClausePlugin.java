@@ -8,7 +8,9 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 
 import java.util.List;
 
-
+/**
+ * 条件查询插件
+ */
 public class ExampleWhereClausePlugin extends PluginAdapter {
     @Override
     public boolean validate(List<String> list) {

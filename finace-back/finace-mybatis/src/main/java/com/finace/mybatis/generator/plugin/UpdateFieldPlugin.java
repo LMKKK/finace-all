@@ -8,6 +8,9 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 
 import java.util.List;
 
+/**
+ * 修改插件，支持将字段设置为null
+ */
 public class UpdateFieldPlugin extends PluginAdapter {
 
     @Override

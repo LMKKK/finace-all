@@ -8,6 +8,9 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 
 import java.util.List;
 
+/**
+ * 统计记录条数插件
+ */
 public class CountPlugin extends PluginAdapter {
 
     @Override

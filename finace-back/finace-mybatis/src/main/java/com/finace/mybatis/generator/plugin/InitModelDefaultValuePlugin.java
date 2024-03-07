@@ -10,6 +10,9 @@ import org.mybatis.generator.internal.util.JavaBeansUtil;
 
 import java.util.List;
 
+/**
+ * 初始化实体类默认值 插件，与数据库默认值保持一致
+ */
 public class InitModelDefaultValuePlugin extends PluginAdapter {
     @Override
     public boolean validate(List<String> list) {

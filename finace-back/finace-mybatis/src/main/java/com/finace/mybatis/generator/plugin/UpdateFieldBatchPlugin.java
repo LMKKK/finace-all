@@ -8,6 +8,9 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 
 import java.util.List;
 
+/**
+ * 批量修改插件，支持多条件修改
+ */
 public class UpdateFieldBatchPlugin extends PluginAdapter {
 
     @Override

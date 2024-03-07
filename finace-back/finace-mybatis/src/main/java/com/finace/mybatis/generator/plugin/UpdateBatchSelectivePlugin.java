@@ -10,6 +10,9 @@ import org.mybatis.generator.internal.util.JavaBeansUtil;
 
 import java.util.List;
 
+/**
+ * 批量修改插件，条件只能是id，若传入的字段为null则不修改
+ */
 public class UpdateBatchSelectivePlugin extends PluginAdapter {
 
     @Override
