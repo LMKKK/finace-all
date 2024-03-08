@@ -204,7 +204,7 @@
                     <include>application-${profiles.active}.yml</include>
                     <include>logback-spring.xml</include>
                     <include>logback-spring-${profiles.active}.xml</include>
-                    <include>mapper/**/*.xml</include>
+                    <include>**/mapper/**/*.xml</include>
                 </includes>
                 <!--maven 编译时会替换文件里面的变量-->
                 <filtering>true</filtering>

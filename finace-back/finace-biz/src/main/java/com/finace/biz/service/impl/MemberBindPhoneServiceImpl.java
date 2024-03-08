@@ -16,7 +16,7 @@ import static com.finace.biz.domain.MemberBindPhoneField.*;
 @RequiredArgsConstructor
 public class MemberBindPhoneServiceImpl implements MemberBindPhoneService {
     final MemberBindPhoneMapper memberBindPhoneMapper;
-    final PasswordEncoder passwordEncoder;
+//    final PasswordEncoder passwordEncoder;
 
     /**
      * 根据手机号获取用户信息
@@ -42,13 +42,14 @@ public class MemberBindPhoneServiceImpl implements MemberBindPhoneService {
      * @param password
      * @return
      */
-    @Override
-    public boolean reg(String phone, long memberId, String password) {
-        MemberBindPhone memberBindPhone = new MemberBindPhone();
-        memberBindPhone.setMemberId(memberId);
-        memberBindPhone.setPhone(phone);
-        memberBindPhone.setPassword(passwordEncoder.encode(password));
-        memberBindPhone.initDefault();
-        return memberBindPhoneMapper.insert(memberBindPhone) > 0;
-    }
+//    @Override
+//    public boolean reg(String phone, long memberId, String password) {
+//        MemberBindPhone memberBindPhone = new MemberBindPhone();
+//        memberBindPhone.setMemberId(memberId);
+//        memberBindPhone.setPhone(phone);
+//        // 对密码进行加密
+//        memberBindPhone.setPassword(passwordEncoder.encode(password));
+//        memberBindPhone.initDefault();
+//        return memberBindPhoneMapper.insert(memberBindPhone) > 0;
+//    }
 }

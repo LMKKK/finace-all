@@ -46,6 +46,7 @@ public class MemberLoginServiceImpl implements MemberLoginService {
         String code = lineCaptcha.getCode();
         // 保存验证码到redis中, 15分钟过期
         redisTemplate.opsForValue().set(GRAPHIC_VERIFICATION_CODE + form.getClientId(), code, 15, TimeUnit.MINUTES);
+        log.info("客户端id{},图形验证码：{}", form.getClientId(), code);
         return lineCaptcha.getImageBase64();
     }
 
