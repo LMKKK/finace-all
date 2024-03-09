@@ -13,16 +13,12 @@ public interface MemberLoginService {
 
     /**
      * 获取图形验证码
-     *
-     * @param clientId
-     * @return
      */
     String getBase64Code(GetBase64CodeForm form);
 
 
     /**
      * 发送短信验证码
-     *
      * @param form
      */
     void sendSmsCode(GetSmsCodeForm form);
@@ -35,4 +31,6 @@ public interface MemberLoginService {
      * @return
      */
     boolean checkBase64Code(String clientId, String code);
+
+    boolean checkSmsCode(String phone, String smsCode, String smsCodeType);
 }

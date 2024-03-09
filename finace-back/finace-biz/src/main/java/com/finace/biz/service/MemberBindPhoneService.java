@@ -19,5 +19,5 @@ public interface MemberBindPhoneService {
      * @param password
      * @return
      */
-//    boolean reg(String phone, long memberId, String password);
+    boolean reg(String phone, long memberId, String password);
 }

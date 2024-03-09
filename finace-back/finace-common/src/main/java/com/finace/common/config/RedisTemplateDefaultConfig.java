@@ -1,4 +1,4 @@
-package com.finace.common;
+package com.finace.common.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

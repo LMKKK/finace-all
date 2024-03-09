@@ -226,6 +226,7 @@ public class Tenant {
     }
 
     public void initDefault() {
+        // 数据初始化,设置默认值
         if (this.getName() == null) {
             this.setName("");
         }
