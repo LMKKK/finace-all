@@ -4,30 +4,30 @@ spring:
   #    active: local
   # 数据库配置
   datasource:
-#    url: jdbc:mysql://localhost:3306/finace?useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
-#    username: root
-#    password: root
+    #    url: jdbc:mysql://localhost:3306/finace?useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    #    username: root
+    #    password: root
     url: jdbc:mysql://124.222.203.242:3306/finace?useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
     username: root
     password: root-lmk
-# redis配置
-redis:
-  database: 0
-  port: 6379
-  lettuce:
-    pool:
-      #连接池中最大空闲连接数为 30。这意味着连接池可以保持最多 30 个空闲的 Redis 连接，以便在需要时重用。
-      max-idle: 30
-      #连接池中最小空闲连接数为 10。这表示连接池至少会保持 10 个空闲连接，以便在需要时快速获取可用连接。
-      min-idle: 10
-      #连接池中的最大活动连接数为 30。这是指连接池在同一时间可以支持的最大活动（使用中）连接数量。
-      max-active: 30
-      #当连接池已用尽且达到最大活动连接数时，从连接池获取连接的最大等待时间为 10,000 毫秒（10 秒）。如果在等待时间内没有可用连接，将抛出连接超时异常。
-      max-wait: 10000
-    # 应用程序关闭时Lettuce 将等待最多 3 秒钟来完成关闭操作。如果超过这个时间仍未完成，则会强制关闭连接。
-    shutdown-timeout: 3000
-#  host: 127.0.0.1
-  host: 124.222.203.242
+  # redis配置
+  redis:
+    database: 1
+    port: 6379
+    lettuce:
+      pool:
+        #连接池中最大空闲连接数为 30。这意味着连接池可以保持最多 30 个空闲的 Redis 连接，以便在需要时重用。
+        max-idle: 30
+        #连接池中最小空闲连接数为 10。这表示连接池至少会保持 10 个空闲连接，以便在需要时快速获取可用连接。
+        min-idle: 10
+        #连接池中的最大活动连接数为 30。这是指连接池在同一时间可以支持的最大活动（使用中）连接数量。
+        max-active: 30
+        #当连接池已用尽且达到最大活动连接数时，从连接池获取连接的最大等待时间为 10,000 毫秒（10 秒）。如果在等待时间内没有可用连接，将抛出连接超时异常。
+        max-wait: 10000
+      # 应用程序关闭时Lettuce 将等待最多 3 秒钟来完成关闭操作。如果超过这个时间仍未完成，则会强制关闭连接。
+      shutdown-timeout: 3000
+    host: 124.222.203.242
+
 redisson:
   address: redis://124.222.203.242:6379
   password: root-lmk
