@@ -4,9 +4,12 @@ spring:
   #    active: local
   # 数据库配置
   datasource:
-    url: jdbc:mysql://localhost:3306/finace?useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+#    url: jdbc:mysql://localhost:3306/finace?useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: root
+    url: jdbc:mysql://124.222.203.242:3306/finace?useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
     username: root
-    password: root
+    password: root-lmk
 # redis配置
 redis:
   database: 0
@@ -23,11 +26,12 @@ redis:
       max-wait: 10000
     # 应用程序关闭时Lettuce 将等待最多 3 秒钟来完成关闭操作。如果超过这个时间仍未完成，则会强制关闭连接。
     shutdown-timeout: 3000
-  host: 127.0.0.1
-
+#  host: 127.0.0.1
+  host: 124.222.203.242
 redisson:
-  address: redis://127.0.0.1:6379
-
+  address: redis://124.222.203.242:6379
+  password: root-lmk
+#  address: redis://127.0.0.1:6379
 # 日志配置
 logging:
   file:
