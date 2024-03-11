@@ -27,6 +27,7 @@ spring:
       # 应用程序关闭时Lettuce 将等待最多 3 秒钟来完成关闭操作。如果超过这个时间仍未完成，则会强制关闭连接。
       shutdown-timeout: 3000
     host: 124.222.203.242
+    password: root-lmk
 
 redisson:
   address: redis://124.222.203.242:6379
